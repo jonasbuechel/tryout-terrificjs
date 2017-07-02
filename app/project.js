@@ -24,6 +24,62 @@ T.Module.Hello.Me = T.createDecorator({
   text: '<p>Hello to myself!</p>'
 });
 
+//NEW MODULE 'lightswitch'
+T.Module.Lightswitch = T.createModule({
+  state: 'off',
+  renderButton(node){
+    // build the template
+    let template = '';
+    template += '<button>Switch (state:'+this.state+')</button>';
+
+    node.innerHTML = template;
+  },
+  start: function(resolve, reject) {
+    const element = this._ctx;
+	  this.renderButton(element);
+
+    // add event
+    element.addEventListener('click', (event) => {
+      if (event.target.tagName === 'BUTTON') {
+        if(this.state === 'off') {
+          this.state = 'on';
+        } else {
+          this.state = 'off';
+        }
+
+        this.renderButton(element);
+        this._events.emit('lightswitch', this.state);
+      }
+    });
+
+	  resolve();
+	}
+});
+
+//NEW MODULE 'lamp'
+T.Module.Lamp = T.createModule({
+  state: 'off',
+  renderLamp(node){
+    // build the template
+    let template = '';
+    template += 'Lamp (state:'+this.state+')';
+
+    node.innerHTML = template;
+  },
+  start: function(resolve, reject) {
+    const element = this._ctx;
+	  this.renderLamp(element);
+
+    // add event
+    this._events.on('lightswitch', (lightswitchState) => {
+      this.state = lightswitchState;
+      this.renderLamp(element);
+    });
+
+	  resolve();
+	}
+});
+
 //BOOTSTRAP THE APPLICATION
 var application = new T.Application();
 application.registerModules();
