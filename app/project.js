@@ -1,6 +1,6 @@
 //NEW MODULE 'HELLOWORLD'
 T.Module.Hello = T.createModule({
-  title: '<h2>Hello World</h2>',
+  title: '<h3>Hello World</h3>',
   text: '<p>this is a friendly hello from my first component :)</p>',
   start: function(resolve, reject) {
 	  // your logic goes here
@@ -20,7 +20,7 @@ T.Module.Hello = T.createModule({
 
 //NEW DECORATOR MODULE 'HELLO ME'
 T.Module.Hello.Me = T.createDecorator({
-  title: '<h2>Hello Me</h2>',
+  title: '<h3>Hello Me</h3>',
   text: '<p>Hello to myself!</p>'
 });
 
