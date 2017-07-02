@@ -1,11 +1,13 @@
 //NEW MODULE 'HELLOWORLD'
-T.Module.HelloWorld = T.createModule({
+T.Module.Hello = T.createModule({
+  title: '<h2>Hello World</h2>',
+  text: '<p>this is a friendly hello from my first component :)</p>',
   start: function(resolve, reject) {
 	  // your logic goes here
     const element = this._ctx;
     let template = '';
-    template += '<h2>Hello World</h2>';
-    template += '<p>this is a friendly hello from my first component :)</p>';
+    template += this.title;
+    template += this.text;
 
     element.innerHTML = template;
 
@@ -14,6 +16,12 @@ T.Module.HelloWorld = T.createModule({
   stop: function(){
     alert('application stopped, so i\'ll stop too...');
   }
+});
+
+//NEW DECORATOR MODULE 'HELLO ME'
+T.Module.Hello.Me = T.createDecorator({
+  title: '<h2>Hello Me</h2>',
+  text: '<p>Hello to myself!</p>'
 });
 
 //BOOTSTRAP THE APPLICATION
